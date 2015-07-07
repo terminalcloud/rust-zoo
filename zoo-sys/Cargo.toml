@@ -1,0 +1,14 @@
+[package]
+name = "zookeeper-sys"
+version = "0.1.0"
+authors = ["Jonathan Reem <jonathan.reem@gmail.com>"]
+description = "FFI bindings to Zookeeper"
+repository = "https://github.com/terminalcloud/zookeeper"
+
+links = "zookeeper_mt"
+build = "build.rs"
+
+[dependencies]
+libc = "0.1"
+
+
