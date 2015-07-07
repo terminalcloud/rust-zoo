@@ -5,18 +5,6 @@ extern crate libc;
 use libc::*;
 use std::mem;
 
-// fn assert_copy<T: Copy, Clone>() {}
-//
-// macro_rules! derive {
-//     ($($t:ident),*) => {$(
-//         fn $t() { assert_copy::<$t>(); }
-//         impl Clone for $t { fn clone(&self) -> Self { *self } }
-//         impl Default for $t { fn default() -> Self { unsafe { mem::zeroed() } } }
-//     )*}
-// }
-//
-// derive! { buffer, iarchive, oarchive, Id, ACL, String_vector }
-
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct buffer {
