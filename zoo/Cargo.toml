@@ -6,6 +6,7 @@ authors = ["Jonathan Reem <jonathan.reem@gmail.com>"]
 
 [dependencies]
 libc = "0.1"
+errno = "0.1"
 
 [dependencies.zoo-sys]
 path = "../zoo-sys"
