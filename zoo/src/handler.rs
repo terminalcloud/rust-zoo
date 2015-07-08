@@ -12,9 +12,6 @@ use ffi::{
     zhandle_t,
     zoo_client_id,
     zoo_recv_timeout,
-    zoo_get_context,
-    zoo_set_context,
-    zoo_set_watcher,
     zoo_state,
 };
 
@@ -23,6 +20,9 @@ use {Error, Result};
 pub struct ZooKeeper {
     raw: *mut zhandle_t
 }
+
+unsafe impl Send for ZooKeeper {}
+unsafe impl Sync for ZooKeeper {}
 
 pub type Type = c_int;
 pub type State = c_int;
@@ -71,6 +71,14 @@ impl ZooKeeper {
 
     pub fn close(mut self) -> Result<()> {
         unsafe { self.close_inner() }
+    }
+
+    pub fn recv_timeout(&self) -> i32 {
+        unsafe { zoo_recv_timeout(self.raw) }
+    }
+
+    pub fn state(&self) -> State {
+        unsafe { zoo_state(self.raw) }
     }
 
     unsafe fn close_inner(&mut self) -> Result<()> {
