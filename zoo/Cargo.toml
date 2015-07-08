@@ -1,0 +1,13 @@
+[package]
+name = "zoo"
+version = "0.1.0"
+description = "Multithreaded client for Zookeeper based on bindings to the C client."
+authors = ["Jonathan Reem <jonathan.reem@gmail.com>"]
+
+[dependencies]
+libc = "0.1"
+
+[dependencies.zoo-sys]
+path = "../zoo-sys"
+version = "0.1"
+
