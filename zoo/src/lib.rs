@@ -1,15 +1,21 @@
+#![feature(cstr_memory)]
 #![cfg_attr(test, deny(warnings))]
 // #![deny(missing_docs)]
 
 extern crate libc;
 extern crate zoo_sys;
-extern crate errono;
+extern crate errno;
+
+#[macro_use]
+extern crate log;
+
+pub use handler::ZooKeeper;
 
 mod ffi;
-mod op;
 mod handler;
 
-use ffi::ZooError;
+use libc::c_int;
+use std::fmt;
 
 pub type Result<T> = ::std::result::Result<T, Error>;
 
@@ -81,6 +87,18 @@ impl Error {
             Some(e) => Err(e),
             None => Ok(())
         }
+    }
+}
+
+impl fmt::Display for Error {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+         fmt::Debug::fmt(self, fmt)
+    }
+}
+
+impl ::std::error::Error for Error {
+    fn description(&self) -> &str {
+        "ZooKeeper Error"
     }
 }
 
